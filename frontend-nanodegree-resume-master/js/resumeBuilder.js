@@ -28,15 +28,15 @@ var displayWork = function(){
 		var formattedTitle = HTMLworkTitle.replace("%data%",
 			work.jobs[job].title);
 		var formattedEmployerTitle = formattedEmployer+formattedTitle;
-		$(".work-entry:last").append(formattedEmployerTitle);
 		var formattedLoc = HTMLworkLocation.replace("%data%",
 			work.jobs[job].location);
-		$(".work-entry:last").append(formattedLoc);
 		var formattedDates = HTMLworkDates.replace("%data%",
 			work.jobs[job].dates);
-		$(".work-entry:last").append(formattedDates);
 		var formattedDesc = HTMLworkDescription.replace("%data%",
 			work.jobs[job].description);
+		$(".work-entry:last").append(formattedEmployerTitle);
+		$(".work-entry:last").append(formattedLoc);
+		$(".work-entry:last").append(formattedDates);
 		$(".work-entry:last").append(formattedDesc);
 	}
 }
@@ -66,7 +66,7 @@ projects.display = function() {
 		$(".project-entry:last").append(formattedTitle);
 		var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
 		$(".project-entry:last").append(formattedDates);
-		var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project]);
+		var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
 		$(".project-entry:last").append(formattedDescription);
 
 		if (projects.projects[project].images.length > 0) {
@@ -105,16 +105,14 @@ bio.display = function() {
 	$("#topContacts").append(formattedGithub);
 	var formattedPic = HTMLbioPic.replace("%data%", bio.bioPic);
 	$("#header").append(formattedPic);
-}
 
-bio.display();
-
-if(bio.skills.length > 0){
-	$("#header").append(HTMLskillsStart);
-	for(i=0;i<bio.skills.length;i++){
-		var formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
-		$("#skills").append(formattedSkills);
-	}
+	if(bio.skills.length > 0){
+		$("#header").append(HTMLskillsStart);
+		for(i=0;i<bio.skills.length;i++){
+			var formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
+			$("#skills").append(formattedSkills);
+			}
+		}
 }
 
 var education = {
@@ -129,8 +127,7 @@ var education = {
 	{
 		"name": "George Mason University",
 		"location": "Fairfax, Virginia",
-		"degree": "B.S.",
-		"major": "Economics",
+		"degree": "B.S. Economics",
 		"datesAttended": "2009-2014",
 		"url": "https://www2.gmu.edu/"
 	}
@@ -139,27 +136,59 @@ var education = {
 	{
 		"title": "Introduction to Interactive Programming Part 1",
 		"school": "Coursera, with Rice University (not-for-credit)",
-		"url": "https://www.coursera.org/account/accomplishments/verify/6NCXGFKN6M"
+		"url": "https://www.coursera.org/account/accomplishments/verify/6NCXGFKN6M",
+		"date": "Completed in 2014"
 	},
 	{
 		"title": "Programming for Everybody",
 		"school": "Coursera, with University of Michigan (not-for-credit)",
-		"url": "https://www.coursera.org/maestro/api/certificate/get_certificate?course_id=972505"
+		"url": "https://www.coursera.org/maestro/api/certificate/get_certificate?course_id=972505",
+		"date": "Completed in 2014"
 	},
 	{
 		"title": "America's Written Constitution, America's Unwritten Constitution",
 		"school": "Coursera, with Yale University (not-for-credit)",
 		"url": ["https://www.coursera.org/account/accomplishments/verify/SKZYAUYQ9J",
-		"https://www.coursera.org/account/accomplishments/verify/UF7QZCP2M4"]
+		"https://www.coursera.org/account/accomplishments/verify/UF7QZCP2M4"],
+		"date": "Completed in 2014"
 	},
 	{
-		"name": "Udacity",
-		"courses": "Front End Web Development Nanodegree",
-		"dateOfGrad": "Oct. 2015-Present",
+		"school": "Udacity",
+		"title": "Front End Web Development Nanodegree",
+		"date": "Oct. 2015-Present",
 		"url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
 	}
 	]
 }
+
+education.display = function(){
+	for (var edu in education.schools){
+		$("#education").append(HTMLschoolStart);
+		var formattedName = HTMLschoolName.replace("%data%", education.schools[edu].name);
+		$(".education-entry:last").append(formattedName);
+		var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[edu].degree);
+		$(".education-entry:last").append(formattedDegree);
+		var formattedDates = HTMLschoolDates.replace("%data%", education.schools[edu].datesAttended);
+		$(".education-entry:last").append(formattedDates);
+		var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[edu].location);
+		$(".education-entry:last").append(formattedLocation);
+	}
+
+	$("#education").append(HTMLonlineClasses);
+	$("#education").append(HTMLschoolStart);
+	for (var mooc in education.onlineCourses){
+		var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[mooc].title);
+		$(".education-entry:last").append(formattedTitle);
+		var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[mooc].school);
+		$(".education-entry:last").append(formattedSchool);
+		var formattedDates = HTMLonlineDates.replace("%data%", education.onlineCourses[mooc].date);
+		$(".education-entry:last").append(formattedDates);
+		var formattedURL = HTMLonlineURL.replace("%data%", education.onlineCourses[mooc].url);
+		$(".education-entry:last").append(formattedURL);
+	}
+}
+
+
 
 /*var inName = function(name){
 	name = name.trim().split(" ");
@@ -172,8 +201,9 @@ var education = {
 
 //$('#main').append(internationalizeButton);
 
-
+bio.display();
 displayWork();
 projects.display();
+education.display();
 
 $("#mapDiv").append(googleMap);
