@@ -1,6 +1,3 @@
-/*
-This is empty on purpose! Your code to build the resume will go here.
- */
 var work = {
 	"jobs": [
 	{
@@ -18,10 +15,10 @@ var work = {
 		"description": "Disassemble servers and other computer hardware, document computer parts"
 	}
 	]
-}
+};
 
 var displayWork = function(){
-	for(job in work.jobs){
+	for(var job in work.jobs){
 		$("#workExperience").append(HTMLworkStart);
 		var formattedEmployer = HTMLworkEmployer.replace("%data%",
 			work.jobs[job].employer);
@@ -39,7 +36,7 @@ var displayWork = function(){
 		$(".work-entry:last").append(formattedDates);
 		$(".work-entry:last").append(formattedDesc);
 	}
-}
+};
 
 var projects = {
 	"projects": [
@@ -57,10 +54,10 @@ var projects = {
 		"images": "images/197x148.gif"
 	}
 	]
-}
+};
 
 projects.display = function() {
-	for (project in projects.projects){
+	for (var project in projects.projects){
 		$("#projects").append(HTMLprojectStart);
 		var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
 		$(".project-entry:last").append(formattedTitle);
@@ -74,7 +71,7 @@ projects.display = function() {
 			$(".project-entry:last").append(formattedImage);
 		}
 	}
-}
+};
 
 var bio = {
 	"name": "Richard Shipe",
@@ -88,7 +85,7 @@ var bio = {
 	"welcomeMessage": "Currently seeking starting front end developer positions.",
 	"skills": ["Python","GitHub","HTML","CSS","Javascript"],
 	"bioPic": "images/fry.jpg"
-}
+};
 
 bio.display = function() {
 	var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
@@ -103,7 +100,7 @@ bio.display = function() {
 	$("#topContacts").append(formattedMobile);
 	var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
 	$("#topContacts").append(formattedEmail);
-	var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github)
+	var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
 	$("#topContacts").append(formattedGithub);
 	var formattedPic = HTMLbioPic.replace("%data%", bio.bioPic);
 	$("#header").append(formattedPic);
@@ -115,7 +112,7 @@ bio.display = function() {
 			$("#skills").append(formattedSkills);
 			}
 		}
-}
+};
 
 var education = {
 	"schools": [
@@ -161,7 +158,7 @@ var education = {
 		"url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
 	}
 	]
-}
+};
 
 education.display = function(){
 	for (var edu in education.schools){
@@ -183,12 +180,12 @@ education.display = function(){
 		$(".education-entry:last").append(formattedTitle);
 		var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[mooc].school);
 		$(".education-entry:last").append(formattedSchool);
-		var formattedDates = HTMLonlineDates.replace("%data%", education.onlineCourses[mooc].date);
-		$(".education-entry:last").append(formattedDates);
+		var formattedDates0 = HTMLonlineDates.replace("%data%", education.onlineCourses[mooc].date);
+		$(".education-entry:last").append(formattedDates0);
 		var formattedURL = HTMLonlineURL.replace("%data%", education.onlineCourses[mooc].url);
 		$(".education-entry:last").append(formattedURL);
 	}
-}
+};
 
 
 
