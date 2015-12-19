@@ -85,7 +85,7 @@ var bio = {
 		"email": "rheechashaipu@gmail.com",
 		"github": "https://github.com/rheechashaipu"
 	},
-	"welcomeMessage": "Welcome to my Front-End Web Development resume",
+	"welcomeMessage": "Currently seeking starting front end developer positions.",
 	"skills": ["Python","GitHub","HTML","CSS","Javascript"],
 	"bioPic": "images/fry.jpg"
 }
@@ -93,8 +93,10 @@ var bio = {
 bio.display = function() {
 	var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
 	var formattedName = HTMLheaderName.replace("%data%", bio.name);
+	var formattedMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
 	$("#header").prepend(formattedRole);
 	$("#header").prepend(formattedName);
+	$("#header").append(formattedMessage);
 	var formattedLocation = HTMLlocation.replace("%data%", bio.location);
 	$("#topContacts").append(formattedLocation);
 	var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
