@@ -17,7 +17,7 @@ var work = {
 	]
 };
 
-var displayWork = function(){
+work.display = function(){
 	for(var job in work.jobs){
 		$("#workExperience").append(HTMLworkStart);
 		var formattedEmployer = HTMLworkEmployer.replace("%data%",
@@ -76,15 +76,16 @@ projects.display = function() {
 var bio = {
 	"name": "Richard Shipe",
 	"role": "Front End Developer",
-	"location": "Fairfax, Virginia",
 	"contacts": {
 		"mobile": "(555) 555-5555",
 		"email": "rheechashaipu@gmail.com",
-		"github": "https://github.com/rheechashaipu"
+		"github": "https://github.com/rheechashaipu",
+		"location": "Fairfax, Virginia",
+		"twitter": "@RichardShipe"
 	},
 	"welcomeMessage": "Currently seeking starting front end developer positions.",
 	"skills": ["Python","GitHub","HTML","CSS","Javascript"],
-	"bioPic": "images/fry.jpg"
+	"biopic": ["images/fry.jpg"]
 };
 
 bio.display = function() {
@@ -94,15 +95,17 @@ bio.display = function() {
 	$("#header").prepend(formattedRole);
 	$("#header").prepend(formattedName);
 	$("#header").append(formattedMessage);
-	var formattedLocation = HTMLlocation.replace("%data%", bio.location);
+	var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
 	$("#topContacts").append(formattedLocation);
 	var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
 	$("#topContacts").append(formattedMobile);
 	var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
 	$("#topContacts").append(formattedEmail);
+	var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
+	$("#topContacts").append(formattedTwitter);
 	var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
 	$("#topContacts").append(formattedGithub);
-	var formattedPic = HTMLbioPic.replace("%data%", bio.bioPic);
+	var formattedPic = HTMLbioPic.replace("%data%", bio.biopic);
 	$("#header").append(formattedPic);
 
 	if(bio.skills.length > 0){
@@ -120,14 +123,16 @@ var education = {
 		"name": "South County Secondary",
 		"location": "Lorton, Virginia",
 		"degree": "Advanced Diploma",
-		"datesAttended": "2004-2009",
+		"majors": ["General Education"],
+		"dates": 2009,
 		"url": "http://www.fcps.edu/southcountyhs/"
 	},
 	{
 		"name": "George Mason University",
 		"location": "Fairfax, Virginia",
-		"degree": "B.S. Economics",
-		"datesAttended": "2009-2014",
+		"degree": "Bachelor's of Science",
+		"majors": ["Economics"],
+		"dates": 2014,
 		"url": "https://www2.gmu.edu/"
 	}
 	],
@@ -136,25 +141,25 @@ var education = {
 		"title": "Introduction to Interactive Programming Part 1",
 		"school": "Coursera, with Rice University (not-for-credit)",
 		"url": "https://www.coursera.org/account/accomplishments/verify/6NCXGFKN6M",
-		"date": "Completed in 2014"
+		"dates": 2014
 	},
 	{
 		"title": "Programming for Everybody",
 		"school": "Coursera, with University of Michigan (not-for-credit)",
 		"url": "https://www.coursera.org/maestro/api/certificate/get_certificate?course_id=972505",
-		"date": "Completed in 2014"
+		"dates": 2014
 	},
 	{
 		"title": "America's Written Constitution, America's Unwritten Constitution",
 		"school": "Coursera, with Yale University (not-for-credit)",
 		"url": ["https://www.coursera.org/account/accomplishments/verify/SKZYAUYQ9J",
 		"https://www.coursera.org/account/accomplishments/verify/UF7QZCP2M4"],
-		"date": "Completed in 2014"
+		"dates": 2014
 	},
 	{
 		"school": "Udacity",
 		"title": "Front End Web Development Nanodegree",
-		"date": "Oct. 2015-Present",
+		"dates": "Oct. 2015-Present",
 		"url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
 	}
 	]
@@ -164,13 +169,14 @@ education.display = function(){
 	for (var edu in education.schools){
 		$("#education").append(HTMLschoolStart);
 		var formattedName = HTMLschoolName.replace("%data%", education.schools[edu].name);
-		$(".education-entry:last").append(formattedName);
 		var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[edu].degree);
-		$(".education-entry:last").append(formattedDegree);
-		var formattedDates = HTMLschoolDates.replace("%data%", education.schools[edu].datesAttended);
+		$(".education-entry:last").append(formattedName);
+		var formattedDates = HTMLschoolDates.replace("%data%", education.schools[edu].dates);
 		$(".education-entry:last").append(formattedDates);
 		var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[edu].location);
 		$(".education-entry:last").append(formattedLocation);
+		var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[edu].majors);
+		$(".education-entry:last").append(formattedMajor, formattedDegree);
 	}
 
 	$("#education").append(HTMLonlineClasses);
@@ -180,7 +186,7 @@ education.display = function(){
 		$(".education-entry:last").append(formattedTitle);
 		var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[mooc].school);
 		$(".education-entry:last").append(formattedSchool);
-		var formattedDates0 = HTMLonlineDates.replace("%data%", education.onlineCourses[mooc].date);
+		var formattedDates0 = HTMLonlineDates.replace("%data%", education.onlineCourses[mooc].dates);
 		$(".education-entry:last").append(formattedDates0);
 		var formattedURL = HTMLonlineURL.replace("%data%", education.onlineCourses[mooc].url);
 		$(".education-entry:last").append(formattedURL);
@@ -201,7 +207,7 @@ education.display = function(){
 //$('#main').append(internationalizeButton);
 
 bio.display();
-displayWork();
+work.display();
 projects.display();
 education.display();
 
